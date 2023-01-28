@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+   <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+   
+   <!-- Enables the Spring MVC @Controller programming model -->
+   <annotation-driven />
+
+   <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+   <resources mapping="/resources/**" location="/resources/" />
+
+   <!-- Tiles-Resolver -->
+   <beans:bean id="tilesViewResolver" 
+            class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+       <beans:property name="viewClass" 
+                  value="org.springframework.web.servlet.view.tiles3.TilesView" />
+       <beans:property name="order" value="1" />
+   </beans:bean>
+
+   <beans:bean id="tilesConfigurer" 
+            class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+      <beans:property name="definitions">
+         <beans:list>
+            <beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+         </beans:list>
+      </beans:property>
+   </beans:bean>
+   
+   <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="prefix" value="/WEB-INF/views/" />
+      <beans:property name="suffix" value=".jsp" />
+      <beans:property name="order" value="2" />
+   </beans:bean>
+
+
+   <!-- component-scan --> 
+   <context:component-scan base-package="org.notive.myapp.controller" />
+   <context:component-scan base-package="org.notive.myapp.service" />
+   <context:component-scan base-package="org.notive.myapp.exception" />
+    <context:component-scan base-package="org.notive.myapp.do
+" />
+    <context:component-scan base-package="org.notive.myapp.mapper" />
+    <context:component-scan base-package="org.notive.myapp.persistence" />
+    <context:component-scan base-package="org.notive.myapp.interceptor" />
+    <context:component-scan base-package="org.notive.myapp.util" />
+   
+   
+   
+   <!-- view-controller -->
+    <view-controller path="/user/main" view-name="user/main" status-code="200"/>
+    <view-controller path="/user/findUserIDPage" view-name="/user/findUserIDPage" status-code="200"/>
+    <view-controller path="/user/findUserPassPage" view-name="/user/findUserPassPage" status-code="200"/>
+    <view-controller path="/user/logout" view-name="/user/logout" status-code="200"/>
+    <view-controller path="/user/login" view-name="/user/login" status-code="200"/>
+    <view-controller path="/user/userCheckPage" view-name="/section/userCheckPage" status-code="200"/>
+    <view-controller path="/user/modifyUserPassPage" view-name="/section/modifyUserPassPage" status-code="200"/>
+    <view-controller path="/user/loginPostPage" view-name="/user/loginPostPage" status-code="200"/>
+    <view-controller path="/user/myPage" view-name="/section/myPage"/>
+ 
+
+    <!-- Websocket
+    <websocket:handlers>
+      <websocket:mapping handler="chatHandler" path="/chat"/>
+      <websocket:handshake-interceptors>
+         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+      </websocket:handshake-interceptors>
+    </websocket:handlers> -->
+
+   <!-- <beans:bean id="chatHandler" class="org.notive.myapp.util.ChatHandler" /> -->
+
+
+   <!-- 파일첨부 -->
+   <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <beans:property name="defaultEncoding" value="utf8"/>
+      <beans:property name="maxUploadSize" value="8192000000"/>
+      <beans:property name="maxUploadSizePerFile" value="8192000000"/>
+      <beans:property name="uploadTempDir" value="file:/c:/temp/upload"/>
+      <beans:property name="maxInMemorySize" value="10485756"/>
+      <beans:property name="preserveFilename" value="true"/>
+   </beans:bean>
+   
+   
+    <!-- 인증메일 -->
+    <beans:bean id="mailSender"  class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <beans:property name="host" value="smtp.gmail.com" />
+      <beans:property name="port" value="587" /><!-- 465 or 25 -->
+         <beans:property name="username" value="notive.adm@gmail.com" />
+         <beans:property name="password" value="shxlqm1@" />
+         <beans:property name="defaultEncoding" value="utf-8" />
+         <beans:property name="javaMailProperties">      
+            <beans:props>
+               <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+               <beans:prop key="mail.smtp.auth">true</beans:prop>
+               <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+               <beans:prop key="mail.debug">true</beans:prop>
+               <beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
+            </beans:props>
+         </beans:property>
+   </beans:bean>
+   
+   
+    <!-- interceptors 설정 -->
+    <interceptors>
+      <interceptor>
+         <mapping path="/user/loginPost"/>
+         
+         <beans:ref bean="loginInterceptor"/>
+      </interceptor>
+      
+      <interceptor>
+         <mapping path="/adminLoginPost"/>
+         
+         <beans:ref bean="adminLoginInterceptor"/>
+      </interceptor>
+      
+      
+      <interceptor>
+         <mapping path="/main/*"/>
+         <mapping path="/main"/>
+         <mapping path="/"/>
+         <mapping path="/user/myPage"/>
+         
+         
+         <beans:ref bean="authInterceptor"/>
+      </interceptor>
+      
+      <interceptor>
+         <mapping path="/admin/*"/>             
+         
+         <beans:ref bean="adminAuthInterceptor"/>
+      </interceptor>
+    </interceptors>
+   
+   
+   <beans:bean id = "passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+    <beans:bean id="loginInterceptor" class="org.notive.myapp.interceptor.LoginInterceptor"/>   
+    <beans:bean id="authInterceptor" class="org.notive.myapp.interceptor.AuthInterceptor"/>
+    <beans:bean id="adminLoginInterceptor" class="org.notive.myapp.interceptor.AdminLoginInterceptor"/>   
+    <beans:bean id="adminAuthInterceptor" class="org.notive.myapp.interceptor.AdminAuthInterceptor"/>
+   
+   
+</beans:beans>

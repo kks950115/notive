@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+										
+<mapper namespace="org.notive.myapp.mapper.DirectoryMapper">			
+ 	
+    <select id="selectAll" resultType="org.notive.myapp.domain.DirectoryVO">
+        SELECT   /*+ index_asc(tbl_directory) */ *
+        FROM tbl_directory
+        where dir_state = #{state}
+        AND user_id = #{userId}
+    </select>
+
+	<select id="select" resultType="org.notive.myapp.domain.DirectoryVO">
+        SELECT  *
+        FROM tbl_directory
+        WHERE dir_no =#{dirNo}
+        AND user_id = #{userId}
+    </select> 
+    
+    <select id="selectSub" resultType="org.notive.myapp.domain.DirectoryVO">
+        SELECT  *
+        FROM tbl_directory
+        WHERE dir_topno =#{dirTopNo}
+        AND user_id = #{userId}
+    </select> 
+    
+    <select id="selectDirNo" resultType="org.notive.myapp.domain.DirectoryVO">
+        SELECT  *
+        FROM tbl_directory
+        WHERE group_no =#{groupNo}
+ 
+    </select> 
+    
+    
+    <insert id="insert">
+        INSERT INTO tbl_directory(dir_name, dir_topno, dir_level, user_id, group_no) 
+        VALUES (#{dirName}, #{dirTopNo}, #{dirLevel}, #{userId}, null)
+    </insert>
+    
+    
+    
+    
+    <insert id="insertSelectKey"  >
+    	<selectKey keyProperty="dirNo" order="BEFORE" resultType="int">
+            SELECT ISEQ$$_108228.nextval FROM dual
+        </selectKey>
+		INSERT INTO tbl_directory(dir_no, dir_name, dir_topno, dir_level, user_id, group_no) 
+        VALUES (#{dirNo}, #{dirName}, #{dirTopNo}, #{dirLevel}, #{userId}, null)
+
+        
+    </insert>
+    
+
+	<insert id="ginsertSelectKey"  >
+    	<selectKey keyProperty="dirNo" order="BEFORE" resultType="int">
+            SELECT ISEQ$$_108228.nextval FROM dual
+        </selectKey>
+		INSERT INTO tbl_directory(dir_no, user_id, dir_group, group_no) 
+        VALUES (#{dirNo}, #{userId}, 2, #{groupNo})
+
+        
+    </insert>
+
+    <update id="update">
+
+        UPDATE tbl_directory 
+        SET dir_name = #{dirName}, 
+            dir_topno = #{dirTopNo},
+            dir_level = #{dirLevel} 
+        WHERE 
+            dir_no = #{dirNo}
+        AND
+            user_id = #{userId}
+        
+    </update>
+    
+    
+    <update id="changeState"  >
+		        UPDATE tbl_directory 
+		        SET 
+		            dir_state = #{state},
+		            dir_del_date = sysdate
+		        WHERE 
+		            dir_no = #{dirNo}
+		        AND user_id = #{userId}
+
+    </update>
+    
+    <insert id="deleteDirectory">
+        <![CDATA[ 
+        
+			DELETE FROM tbl_directory
+			WHERE  dir_no = #{dirNo}
+			
+        ]]>
+	</insert>
+    
+
+    
+	
+
+
+    
+</mapper>
+

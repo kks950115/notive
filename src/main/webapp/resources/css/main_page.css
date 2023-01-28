@@ -1,0 +1,697 @@
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+
+@font-face  {
+    font-family: "SCDream7";
+    src: url("../font/SCDream7.otf");
+}
+
+* {
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+
+html, body {
+    overflow : hidden;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    color: #000051;
+}
+
+button {
+    border: 0;
+    outline: 0;
+}
+
+i {
+    color: #212121; 
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.wrapa a,
+.wrap a:link ,
+.wrap a:visited,
+.wrap a:hover { 
+    font-weight: normal;
+    text-decoration: none;
+
+    color: #212121; 
+}
+
+.wrap ul {
+    list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
+
+/* ======================================================== */
+
+/* header */
+
+header {
+    inherits: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 65px;
+	border-bottom:solid 1px #cccccc;
+
+	padding: 10px;
+    /* background-color: #0031ca; */
+
+    box-shadow: 0 2px 4px rgba(57, 63, 72, 0.3);
+}
+
+header #title {
+    font-family: "SCDream7";
+
+    width: 150px;
+
+    font-size: 30px;
+    font-style: unset;
+
+    text-align: center;
+    align-self: center;
+
+    direction: unset;
+
+    /* color: #37474f;  */
+    color: #0043ca;
+
+}
+
+header > i {
+    margin: 5px;
+}
+
+header .xi-cloud-o {
+    margin-left: auto;
+    align-self: center;
+
+    color: #0043ca; 
+}
+
+header .xi-profile {
+    color: #9e9e9e; 
+}
+
+header .progress-storage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-right: 10px;
+}
+
+header .bar-container {
+    width: 100px;
+    
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+header .bar {
+    width: 50%;
+    height: 9px;
+
+    background-color: #0043ca;
+    border-radius: 5px;
+}
+
+header .bar-container + span {
+    text-align: center;
+    font-size: 8px;
+}
+
+header .mypage_icon {
+    padding: 10px;
+}
+
+/* ======================================================== */
+
+/* main */
+
+main {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+}
+
+/* ======================================================== */
+
+/* aside-left */
+
+.aside-left {
+    display: flex;
+}
+
+.aside-left .aside {
+    display: flex;
+    flex-direction: column;
+
+    width: 250px; 
+
+    background-color: #f5f5f5;
+}
+/* aside_menu */
+
+.aside-left .aside_menu {
+    display: flex;
+
+    margin: 5px;
+    height: 31px;
+    font-size: 16px;
+
+    cursor: pointer;
+    
+    border-radius: 10px;
+    align-items: center;
+
+    transition: all .1s;
+}
+
+/* search */
+
+.aside-left .search_box {
+    display: flex;
+
+    margin: 5px;
+    height: 41px;
+}
+
+.aside-left .search_area {
+    display: flex;
+
+    background-color: #1a237e;
+    border-radius: 20px;
+
+}
+
+.aside-left .search_icon {
+    display: flex;
+
+    border: none;
+    background-color: unset;
+
+    align-items: center;
+    cursor: pointer;
+}
+
+.aside-left .search_icon i {
+    display: flex;
+
+    width: 40px;
+    font-size: 1.5em;
+
+    color: white;
+
+
+    justify-content: center;
+    
+}
+
+
+.aside-left .search_icon + input {
+    width: 200px;
+    height: 100%;
+
+    border: none;
+
+    color: white;
+    background-color: #1a237e;
+
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+/* Search 설정 */
+
+input::-ms-clear,
+input::-ms-reveal {
+    display:none;
+    width:0;
+    height:0;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display:none;
+}
+
+/* Search 클릭시 테두리 삭제 */
+input:focus {
+    outline:none;
+}
+
+/* Search 기본글 설정 */
+input::placeholder {
+    color: white;
+}
+
+/* ======================================================== */
+
+/* 사이드메뉴 펼쳤을 때 */
+
+
+.aside-left .group {
+    display: none;
+    position: relative;
+}
+
+.aside-left .directory ul{
+    display: none;
+    position: relative;
+
+    list-style-type: none;
+
+}
+
+.aside-left .group > li {
+    display: flex;
+
+    list-style-type: none;
+
+    margin-left: 30px;
+    line-height: 31px;
+    margin-right: 5px;
+}
+
+ 
+
+.aside-left .directory ul li{
+    display: none;
+ 
+    list-style-type: none;
+    
+    margin-left: 30px;
+    line-height: 31px;
+    margin-right: 5px;
+  
+}
+.aside-left .directory ul li span,
+.aside-left .directory ul li a,
+.aside-left .directory ul li > div{
+    display: flex;   
+    
+    color: #333;
+}
+
+ 
+
+.aside-left .directory ul li div>div{
+    display: none;
+}
+
+
+ .newDiv {
+	color: #000051;
+	
+	margin-left: 30px;
+    line-height: 31px;
+    margin-right: 5px;
+}
+
+.aside-left li i {
+    padding: 1px 6px;
+    color: inherit;
+    align-self: center;
+}
+
+.aside-left li[class*="subDir"],
+.aside-left .groupli {
+    cursor: pointer;
+
+    transition: all .1s;
+}
+
+/* ======================================================== */
+
+
+/* 활성화 안된 폴더나 그룹폴더를 호버링 할 때*/
+ 
+.aside-left .dirli:hover:not(.active),
+.aside-left .groupli:hover:not(.active) {
+    background-color: #ffffff !important;
+    border-radius: 3px;
+}
+
+/* 활성화 안된 Drive, Group, 휴지통 호버링 할 때*/
+.aside-left .aside_menu:hover:not(.active){
+    background-color: white;
+}
+
+.aside-left .aside_icon {
+    display: flex;
+
+    width: 35px;
+
+    cursor: pointer;
+}
+
+.aside-left .aside_icon i{
+    font-size: 1.5em;
+    color: inherit;
+}
+
+.aside-left .aside_text {
+    /* height: 29.6px; */
+}
+
+/* 휴지통에는 하위메뉴 아이콘이 없어서 빈 공간 만듦 */
+.aside-left .blank_space {
+    width: 16px;
+}
+
+/* ======================================================== */
+
+
+/* + 아이콘 */
+/* 펼쳤을 때만 보임 */
+
+#drive_new,
+.group_new {
+    display: flex;
+
+    margin-left: auto;
+    margin-right: 10px;
+
+    width: 20px;
+    height: 20px;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: inherit;
+}
+
+#drive_new i,
+.group_new i {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.aside_menu button i:hover {
+    color: #0043ca;
+}
+
+/* ======================================================== */
+
+/* 폴더, 그룹 이름 input태그 임시 속성 */
+.newDiv,
+.temp-a,
+.temp-a-new,
+.temp-a-change{
+    background-color: white;
+    border-radius: 3px;
+
+    border: 1px dashed #3f51b5;
+}
+
+ 
+ #newInput,
+.temp-input,
+.temp-input-new,
+.temp-input-change{
+    border: 0;
+    background-color: white;
+}
+
+/* 중복 안내창 출력 */
+.duplicated {
+    position: absolute;
+
+    width: 213px;
+    margin-left: 30px;
+    font-size: 13px;
+
+    text-align: center;
+
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #d50000;
+    background-color: #d50000;
+    color: white;
+
+}
+
+
+/* ======================================================== */
+
+/* 접기 버튼 */
+
+.aside-left .aside_fold {
+    display: flex;
+
+    transition: all 0.3s;
+}
+
+.aside-left .aside_fold:hover {
+    cursor: pointer;
+    border: 0.5px;
+
+    background-color: #e8eaf6;
+    border-radius: 2px;
+
+}
+
+.aside-left .aside_fold .bi {
+    font-size: 16px;
+    align-self: center;
+}
+
+/* ======================================================== */
+
+/* Secion */
+
+
+section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    overflow: auto;
+    
+    padding: 10px 20px 0 5px;
+}
+
+section .section_title {
+    font-size: 18px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px #cccccc;
+}
+
+section .file_area {
+
+    display: flex;
+
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding: 20px;
+
+    height: 100%;
+}
+
+section .file {
+    /* margin: 10px; */
+
+    width: 300px;
+    height: 200px;
+
+    border: 1px solid #0043ca;
+    border-radius: 5px;
+}
+
+section .name {
+    font-size: 20px;
+    text-align: center;
+    
+    border-bottom: solid 1px #0043ca;
+}
+
+section .content {
+    border: 5px;
+}
+
+/* ======================================================== */
+
+.aside-right{
+    border-left: solid 1px #cccccc;
+}
+
+.icon-list {
+    display: flex;
+    flex-direction: column;
+
+    width: 50px;
+}
+
+.aside-right .icon-list .bi {
+    align-self: center;
+    
+    font-size: 30px;
+    
+    color: #464646;
+
+    transition: all .1s;
+}
+
+.aside-right .icon-list .bi:hover {
+    color: #0043ca;
+    font-size: 32px;
+}
+
+
+/* =============================================================== */
+/* =============================================================== */
+/* =============================================================== */
+/* 클릭 이벤트 속성 */
+
+/* activated 메뉴 속성 */
+.active {
+    border-radius: 3px;
+
+    /* 1번 */
+    /* border: 1px dashed #0043ca;
+    color: black;
+    background-color: white; */
+    /* 2번 */
+    background-color: #3f51b5;
+    color: white ;
+
+    transition: all .3s ease-in-out;
+}
+
+.active a span{
+    color: white !important;
+}
+
+/* 사이드메뉴 접을 때 */
+/* 사이드메뉴에 .fold 설정*/
+
+/* 사이드 메뉴 크기조절 */
+
+.fold .aside {
+    width: 50px;
+
+    transition: all .3s ease-in-out;
+}
+
+/* 아이콘 제외하고 모두 표시 X */
+ .fold div input,    /*  검색창  */
+.fold div span,           /*  글자    */
+.fold div button,         /*  +버튼   */
+.fold ul li{           /*  폴더리스트   */
+    display: none !important;
+
+    transition: all .3s ease-in-out;
+}
+
+/* 검색아이콘 가운데 정렬 */
+.fold .search_box{
+    align-self: center;
+}
+
+/* 검색 아이콘 호버 */
+.fold .search_area:hover:not(.active){
+    background-color: #0043ca;
+}
+
+/* 나머지 아이콘 정렬, 크기조절 */
+.fold .aside_menu{
+    align-self: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.fold .aside_icon{
+    width: unset;
+}
+
+.fold .aside_menu:hover:not(.active){
+    background-color: white;
+}
+
+/* ======================================================== */
+
+
+/* 우측 사이드 메뉴 */
+/* 클릭시 이동 가능한 박스 생성 */
+/* 이 박스에 각 컨텐츠 담는다! */
+
+.aside-right .icon-list i {
+    cursor: pointer;
+}
+
+.aside-right .menu-list {
+    position: relative;
+
+}
+
+.aside-right .menu-list div {
+    display: none;
+    position: absolute;
+
+    width: 0px;
+    height: 0px;
+
+    border-radius: 10px;
+    
+    background-color: white;
+    /* border: 2px solid black; */
+    box-shadow: 1px 0px 5px 2px rgba(0,0,0,.3); 
+
+}
+
+/* 알림창 내용의 초대목록 */
+
+.invite-group-list {
+    margin: 8px;
+    padding: 5px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.invite-group-list .invit-content {
+    margin: 10px;
+    font-size: 16px;
+}
+
+.invite-group-list .invit-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.invite-group-list .invit-buttons button {
+    margin: 4px;
+}
+
+section::-webkit-scrollbar {
+    width: 10px;
+}
+section::-webkit-scrollbar-thumb {
+    background-color: #fafafa;
+    /* border-radius: 5px; */
+}
+section::-webkit-scrollbar-track {
+    /* border-radius: 5px; */
+    box-shadow: inset 0px 0px 5px white;
+}
+
+

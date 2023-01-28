@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+										
+<mapper namespace="org.notive.myapp.mapper.FileMapper">			
+   
+    <insert id="insert">
+        INSERT INTO 
+        	tbl_file(
+        		user_id, file_uuid, file_path, file_name, 
+        		file_type, file_size, dir_no, 
+        		file_upload_date, file_state, group_no) 
+        VALUES 
+        	(#{userId}, #{fileUuid}, #{filePath}, #{fileName}, 
+        	#{fileType}, #{fileSize}, #{dirNo}, 
+        	sysdate, 1, null)
+        	
+    </insert>
+    
+
+    <insert id="insertSelectKey">
+    	<selectKey keyProperty="fileNo" order="BEFORE" resultType="int">
+            SELECT ISEQ$$_108234.nextval FROM dual
+        </selectKey>
+        
+		INSERT INTO 
+			tbl_file( user_id,
+				file_no, file_uuid, file_path, 
+				file_name, file_type, file_size, 
+				dir_no, file_upload_date, file_state, group_no) 
+        VALUES 
+        	(#{userId}, #{fileNo}, #{fileUuid}, #{filePath}, 
+        	#{fileName}, #{fileType}, #{fileSize}, 
+        	#{dirNo}, sysdate, 1, null)
+    </insert>
+ 
+    
+    
+    <update id="changeState">
+        
+        UPDATE  
+            tbl_file
+        SET 
+            file_state= #{state},
+            file_delete_date=sysdate
+        WHERE file_no = #{fileNo}
+        AND user_id = #{userId}
+        
+
+    </update>
+
+    <select id="selectAllFileOfUser" resultType="org.notive.myapp.domain.AttachFileVO">
+        SELECT  /*+ index_desc(tbl_file) */ *
+        FROM tbl_file
+        WHERE user_id = #{userId}
+        AND file_state = #{state}
+
+    </select>
+
+    <select id="selectAll" resultType="org.notive.myapp.domain.AttachFileVO">
+        SELECT  /*+ index_desc(tbl_file) */ *
+        FROM tbl_file
+        WHERE dir_no =#{dirNo}
+        AND user_id = #{userId}
+        AND file_state = #{state}
+    </select>
+    
+    <select id="selectFileVO" resultType="org.notive.myapp.domain.AttachFileVO">
+        SELECT  *
+        FROM tbl_file
+        WHERE file_no =#{fileNo}
+        AND user_id = #{userId}
+
+    </select>
+    
+   <insert id="deleteFile">
+        <![CDATA[ 
+        
+			DELETE FROM tbl_file
+			WHERE  file_no = #{fileNo}
+			
+        ]]>
+	</insert>
+    
+    
+ 
+ 
+	<select id="selectSearchList" resultType="org.notive.myapp.domain.AttachFileVO">
+    	SELECT /*+ index_desc(tbl_memo) */ *
+    	FROM tbl_file
+    	WHERE user_id = #{userId}
+    	  AND file_state = 1
+    	  AND file_name like '%'||#{search}||'%'
+    </select>
+
+    
+</mapper>
+
+
+
+ 

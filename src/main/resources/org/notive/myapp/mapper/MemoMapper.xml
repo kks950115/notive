@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+										
+<mapper namespace="org.notive.myapp.mapper.MemoMapper">	
+
+    <select id="selectAllOfUser" resultType="org.notive.myapp.domain.MemoVO">
+        SELECT   /*+ index_desc(tbl_memo) */ *
+        FROM tbl_memo
+        WHERE 
+        	user_id = #{userId} 
+        AND memo_state=#{state}   
+    </select>		
+ 	
+    <select id="selectAll" resultType="org.notive.myapp.domain.MemoVO">
+        SELECT   /*+ index_desc(tbl_memo) */ *
+        FROM tbl_memo
+        WHERE 
+       	dir_no = #{dirNo}
+        AND 
+        	user_id = #{userId} 
+        AND memo_state=#{state}   
+    </select>
+    
+    
+    <select id="selectSearchList" resultType="org.notive.myapp.domain.MemoVO">
+    	SELECT /*+ index_desc(tbl_memo) */ *
+    	FROM tbl_memo
+    	WHERE user_id = #{userId}
+    	  AND memo_state = 1
+    	  AND ( memo_title like '%'||#{search}||'%'
+          OR  memo_content like '%'||#{search}||'%' )
+    </select>
+
+    
+    <select id="selectMemoVO" resultType="org.notive.myapp.domain.MemoVO">
+        SELECT   /*+ index_desc(tbl_memo) */ *
+        FROM tbl_memo
+        WHERE user_id = #{userId} 
+        AND memo_no =#{memoNo}
+    </select>
+    
+    
+    <insert id="insert">
+        INSERT INTO tbl_memo(dir_no, user_id, memo_title, memo_content, group_no) 
+        VALUES (#{dirNo}, #{userId}, #{memoTitle},#{memoContent}, null)
+    </insert>
+    
+    
+    
+    
+    <insert id="insertSelectKey">
+    	<selectKey keyProperty="memoNo" order="BEFORE" resultType="int">
+            SELECT ISEQ$$_108247.nextval FROM dual
+        </selectKey>
+		INSERT INTO tbl_memo(memo_no, memo_title, memo_content, dir_no, user_id, group_no ) 
+        VALUES (#{memoNo}, #{memoTitle}, #{memoContent}, #{dirNo}, #{userId}, null)
+    </insert>
+    
+    <update id="update">
+
+        UPDATE tbl_memo 
+        SET memo_title = #{memoTitle}, 
+            memo_content = #{memoContent}, 
+            MEMO_UPDATE_DATE = sysdate
+        WHERE 
+        	dir_no = #{dirNo}
+        AND	user_id = #{userId} 
+        AND memo_no = #{memoNo}
+        
+    </update>
+    
+    
+    <update id="changeState">
+        
+        UPDATE tbl_memo
+        SET memo_state = #{state}
+        WHERE	user_id = #{userId} 
+        AND memo_no = #{memoNo}
+        
+    </update>
+    
+    <insert id="deleteMemo">
+        <![CDATA[ 
+        
+			DELETE FROM tbl_memo
+			WHERE  memo_no = #{memoNo}
+			
+        ]]>
+	</insert>
+
+
+    
+</mapper>
+
+
+
+ 

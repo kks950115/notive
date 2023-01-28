@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.notive.myapp.mapper.InvitationMapper">
+
+	<select id="selectInvitationList"
+		resultType="org.notive.myapp.domain.InvitationVO">
+        <![CDATA[ 
+        
+			SELECT 
+			   /*+ index_desc(tbl_invitation) */  *
+			FROM 
+			    tbl_invitation
+			WHERE 
+			    user_id = #{user_id}
+        
+        ]]>
+	</select>
+	
+	<select id="selectCountUserInvitation" resultType="int">
+        <![CDATA[ 
+        
+			SELECT COUNT(*)
+			FROM tbl_invitation
+    		WHERE group_no = #{group_no}
+    		AND user_id = #{user_id}
+    		
+        ]]>
+	</select>
+
+	<insert id="insertInvitation">
+        <![CDATA[ 
+        
+	        INSERT INTO tbl_invitation (invit_no, group_no, group_name, invit_id, user_id)
+	        VALUES (#{invit_no}, #{group_no}, #{group_name}, #{invit_id}, #{user_id})
+    
+        ]]>
+	</insert>
+
+	<insert id="insertInvitationSelectKey">
+		<selectKey keyProperty="invit_no" order="BEFORE" resultType="int">
+			SELECT "ISEQ$$_106964".nextval FROM dual
+		</selectKey>
+
+        <![CDATA[ 
+        
+	        INSERT INTO tbl_invitation (invit_no, group_no, group_name, invit_id, user_id)
+	        VALUES (#{invit_no}, #{group_no}, #{group_name}, #{invit_id}, #{user_id})
+    
+        ]]>
+
+	</insert>
+
+	<delete id="deleteInvitation" >
+        <![CDATA[ 
+        
+			DELETE FROM tbl_invitation
+			WHERE group_name = #{group_name}
+    
+        ]]>
+	</delete>
+
+</mapper>

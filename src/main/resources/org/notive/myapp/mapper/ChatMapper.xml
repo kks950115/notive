@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.notive.myapp.mapper.ChatMapper">
+	<select id="selectAllChatList" 
+			resultType="org.notive.myapp.domain.GroupVO">
+			
+        <![CDATA[ 
+        
+			SELECT 
+			   /*+ index_asc(tbl_chat) */  *
+			FROM 
+			    tbl_chat
+			WHERE 
+			    user_id = #{user_id}
+        ]]>
+	</select>
+	
+	<select id="selectChatListInGroup" 
+			resultType="org.notive.myapp.domain.ChatVO">
+			
+        <![CDATA[ 
+        
+			SELECT 
+			   /*+ index_asc(tbl_chat) */  *
+			FROM 
+			    tbl_chat
+			WHERE 
+			    room_no = #{room_no}
+        ]]>
+	</select>
+
+	<select id="selectChatRoomList" resultType="int">
+		<![CDATA[ 
+        
+			SELECT 
+			    room_no
+			FROM 
+			    tbl_chat
+			WHERE 
+			    user_id = #{user_id}
+			GROUP BY
+				room_no
+        ]]>
+	</select>
+	
+	<select id="updateUnReadCount">
+			
+        <![CDATA[ 
+        
+        	UPDATE tbl_chat
+        	
+			SET 
+			    chat_unread_count = chat_unread_count -1
+			WHERE
+			    room_no = #{room_no}
+			AND
+			    chat_no > #{chat_lastread_no}
+			AND
+				chat_unread_count > 0
+						
+        ]]>
+	</select>
+	
+	<insert id="insertChat">
+		<![CDATA[ 
+			INSERT INTO tbl_chat (room_no, user_id, chat_content, chat_date, chat_unread_count)
+	        VALUES (#{room_no}, #{user_id}, #{chat_content}, #{chat_date}, #{chat_unread_count})
+		]]>
+	</insert>
+	
+	<select id="selectLastReadNo" 
+			resultType="int">
+			
+        <![CDATA[ 
+        
+			SELECT 
+			    chat_lastread_no
+			FROM 
+			    tbl_chat_unread_management
+			WHERE 
+			    room_no = #{room_no}
+			AND
+				user_id = #{user_id}
+				
+        ]]>
+	</select>
+	
+	<select id="selectCountUnreadChatFromLastRead" 
+			resultType="int">
+			
+        <![CDATA[ 
+        
+			SELECT 
+				COUNT(*)
+			FROM
+				tbl_chat
+			WHERE
+				room_no = #{room_no}
+			AND 
+				chat_no > #{chat_no}
+				
+        ]]>
+	</select>
+	
+	<select id="updateLastReadNo">
+			
+        <![CDATA[ 
+        
+        	UPDATE tbl_chat_unread_management
+        	
+        	SET 
+            	chat_lastread_no = #{chat_lastread_no}
+        	WHERE
+            	room_no = #{room_no}
+        	AND
+            	user_id = #{user_id}
+			
+				
+        ]]>
+	</select>
+	
+	<select id="insertUserReadNo">
+			
+        <![CDATA[ 
+			INSERT INTO tbl_chat_unread_management (room_no, user_id, chat_lastread_no)
+	        VALUES (#{room_no}, #{user_id}, #{chat_lastread_no})
+       ]]>
+	</select>
+	
+	<select id="deleteUserReadNo">
+			
+        <![CDATA[ 
+			DELETE FROM tbl_chat_unread_management
+			WHERE room_no = #{room_no}
+			AND user_id = #{user_id}      
+		]]>
+	</select>
+</mapper>

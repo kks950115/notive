@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.notive</groupId>
+	<artifactId>myapp</artifactId>
+	<version>1.0.0-BUILD-SNAPSHOT</version>
+
+	<packaging>war</packaging>
+
+	<name>Notive</name>
+	<url>org.notive.myapp</url>
+	<description>first pojo project</description>
+
+
+	<properties>
+		<java-version>11</java-version>
+		<java-home>${env.JAVA_HOME}</java-home>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<org.springframework-version>5.3.9</org.springframework-version>
+		<org.aspectj-version>1.9.7</org.aspectj-version>
+		<log4j2-version>2.14.1</log4j2-version>
+		<org.slf4j-version>1.7.32</org.slf4j-version>
+		<org.springsecurity-version>5.3.9.RELEASE</org.springsecurity-version>
+	</properties>
+
+
+	<dependencies>
+      <!--============== Logging ================ -->
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- log4j2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2-version}</version>
+		</dependency>
+		
+		<!-- log4j-core -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2-version}</version>
+		</dependency>
+
+		<!-- slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- slf4j-api for HikariCP -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+
+		<!-- jcl-over-slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+        <!--============== Servlet/JSP ================ -->
+
+		<!-- servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- <version>3.1.0</version> -->
+			<version>4.0.1</version>
+
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- jsp-api -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- ============= AspectJ ============= -->
+
+		<!-- aspectjrt -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+		<!-- aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+		<!-- =============== Spring ================= -->
+
+		<!-- spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- spring-webmvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- spring-tx -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>${org.springsecurity-version}</version>
+		</dependency>
+      
+		<!-- spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- spring-websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- javax.websocket-api -->
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- HikariCP -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+
+ 	    <!-- =============== Test ================= -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- =============== Misc ================= -->
+		
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- mail -->
+	    <dependency>
+	        <groupId>javax.mail</groupId>
+	        <artifactId>mail</artifactId>
+	        <version>1.4.7</version>
+	    </dependency>
+
+	    <!-- =============== MyBatis ================= -->
+	    
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+
+		<!-- mybatis-spring -->
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+
+		<!-- log4j2-jdbc4.1 -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+			<version>1.16</version>
+		</dependency>		
+		
+		<!-- =============== TO return JSON or XML ================= -->
+      
+		<!-- jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.12.4</version>
+		</dependency>
+		<!-- jackson-annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.12.4</version>
+		</dependency>
+
+		<!-- jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.4</version>
+		</dependency>
+		
+		<!-- jackson-dataformat-xml : 이미지 썸네일 설정-->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		    <version>2.12.4</version>
+		</dependency>
+		
+
+		<!-- gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+
+		<!-- =============== Misc ================= -->
+		
+		<!-- commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		
+		<!-- thumbnailator : 이미지 썸네일 처리 -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.8</version>
+		</dependency>
+		
+
+		<!-- =============== tiles =============== -->
+
+		<!-- tiles-jsp -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- tiles-core -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- tiles-api -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-api</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- tiles-servlet -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<!-- tiles-extras -->
+		<dependency> 
+			<groupId>org.apache.tiles</groupId> 
+			<artifactId>tiles-extras</artifactId> 
+			<version>3.0.8</version> 
+		</dependency>
+
+	  
+		
+
+		<!-- =============== ojdbc8-production =============== -->
+		<dependency>
+
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8-production</artifactId>
+			<version>21.1.0.0</version>
+			<type>pom</type>
+
+			<exclusions>
+				<exclusion>
+					<groupId>com.oracle.database.ha</groupId>
+					<artifactId>simplefan</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.ha</groupId>
+					<artifactId>ons</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.jdbc</groupId>
+					<artifactId>rsi</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.jdbc</groupId>
+					<artifactId>ucp</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.xml</groupId>
+					<artifactId>xdb</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>com.oracle.database.xml</groupId>
+					<artifactId>xmlparserv2</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>/</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
+
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+
+					<additionalBuildcommands>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+					</additionalBuildcommands>
+
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6</version>
+
+				<configuration>
+					<mainClass>org.test.int1.Main</mainClass>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+
+				<configuration>
+					<!-- 플러그인 설정 -->
+					<verbose>true</verbose> <!-- log를 자세하게 찍어라. 문제생겼을때 자세하게 나옴 -->
+					<fork>true</fork> <!-- 메이븐 컴파일러가 자바컴파일러를 프로세스로 실행 시킵니까? -->
+
+					<!-- 메이븐 컴파일러가 자바컴파일러를 실행시킬때 사용하는 메모리 최소, 최대 -->
+					<meminitial>64m</meminitial>
+					<maxmem>128m</maxmem>
+
+					<encoding>${project.build.sourceEncoding}</encoding>
+
+					<source>${java-version}</source> <!-- 자바 소스파일(.java) 버전 -->
+					<target>${java-version}</target> <!-- 컴파일 결과물(.class) 버전 -->
+
+					<executable>${java-home}\bin\javac</executable> <!-- 자바 컴파일러 선택 -->
+
+					<!-- 컴파일러의 옵션을 바꾸는 태그 -->
+					<compilerArgs>
+						<arg>-verbose</arg>
+						<arg>-Xlint:all,-options,-path</arg>
+						<arg>--release</arg> <!-- 이 옵션을 넣으면 설정된 버전까지 호환되는 컴파일 결과물이 생성된다. -->
+					</compilerArgs>
+
+					<showWarnings>true</showWarnings> <!-- 커파일시 경고들 미리 보여준다. -->
+					<showDeprecation>true</showDeprecation> <!-- 이제 사용안할 문법, 메소드도 보여준다. -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

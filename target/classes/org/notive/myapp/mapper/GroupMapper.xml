@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.notive.myapp.mapper.GroupMapper">
+
+	<select id="selectGroupName"
+		resultType="String">
+        <![CDATA[ 
+        
+			SELECT 
+			   group_name
+			FROM 
+			    tbl_group
+			WHERE 
+			    group_no = #{group_no}
+        ]]>
+	</select>
+
+	<select id="selectUserGroupList"
+		resultType="org.notive.myapp.domain.GroupVO">
+        <![CDATA[ 
+        
+			SELECT 
+			   /*+ index_desc(tbl_group) */  *
+			FROM 
+			    tbl_group
+			WHERE 
+			    group_no IN ( SELECT 
+			                  	group_no
+			                  FROM 
+			                    tbl_user_group
+			                  WHERE 
+			                    user_id = #{user_id})
+        
+        ]]>
+	</select>
+
+	<select id="selectUserGroupNList"
+	resultType="org.notive.myapp.domain.UserGroupVO">
+	<![CDATA[ 
+	
+		SELECT 
+		   /*+ index_desc(tbl_user_group) */  *
+		FROM 
+			tbl_user_group
+		WHERE 
+			user_id = #{user_id}
+	
+	]]>
+	</select>
+	
+	<select id="selectCountExistUserInGroup"
+	resultType="int">
+	
+	<![CDATA[ 
+	
+		SELECT 
+		   count(*)
+		FROM 
+			tbl_user_group
+		WHERE 
+			group_no = #{group_no}
+		AND
+			user_id = #{user_id}
+	
+	]]>
+	</select>
+	
+		<select id="selectUserListInGroup"
+	resultType="String">
+	<![CDATA[ 
+	
+		SELECT 
+		   user_id
+		FROM 
+			tbl_user_group
+		WHERE 
+			group_no = #{group_no}
+	
+	]]>
+	</select>
+
+
+	<insert id="insertGroup">
+        <![CDATA[ 
+        
+	        INSERT INTO tbl_group (group_name)
+	        VALUES (#{group_name})
+    
+        ]]>
+	</insert>
+
+	<insert id="insertGroupSelectKey">
+		<selectKey keyProperty="group_no" order="BEFORE" resultType="int">
+			SELECT "ISEQ$$_99785".nextval FROM dual
+		</selectKey>
+
+        <![CDATA[ 
+        
+	        INSERT INTO tbl_group (group_no, group_name)
+	        VALUES (#{group_no}, #{group_name})
+    
+        ]]>
+
+	</insert>
+
+	<insert id="insertUserGroup">
+        <![CDATA[ 
+        
+			INSERT INTO tbl_user_group (GROUP_NO, USER_ID, USER_GROUP_NAME)
+			VALUES (#{group_no}, #{user_id}, #{user_group_name})
+    
+        ]]>
+	</insert>
+	
+	<update id="updateUserGroup">
+        <![CDATA[ 
+        
+			UPDATE tbl_user_group
+        	SET 
+            	user_group_name = #{user_group_name}
+        	WHERE
+            	group_no = #{group_no}
+        	AND
+            	user_id = #{user_id}
+    
+        ]]>
+	</update>
+
+	<delete id="deleteUserGroup" >
+        <![CDATA[ 
+        
+			DELETE FROM tbl_user_group
+			WHERE user_id = #{user_id}
+			AND user_group_name = #{user_group_name}
+    
+        ]]>
+	</delete>
+	
+	<delete id="deleteGroup" >
+        <![CDATA[ 
+        
+			DELETE FROM tbl_group
+			WHERE group_no Not IN (SELECT group_no FROM tbl_user_group)
+    
+        ]]>
+	</delete>
+
+
+</mapper>

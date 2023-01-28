@@ -1,0 +1,187 @@
+@charset "UTF-8";
+
+.myPage-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.userSection-fieldSet{
+    display:flex;
+    flex-direction: column;
+    padding: 20px;
+
+    border: 1px #cecece solid;
+}
+
+#userCheckPage-fieldSet {
+	width: 500px;
+}
+
+a:hover {
+    cursor: pointer;
+}
+/* ------------ 인풋박스 ----------- */
+.input-box, .input-selectBox, .input-box-myPage, .modifyPass-input-box{
+    display: inline-block !important;
+    width: 80%;
+    height: 35px;
+
+    border: 0px;
+    border-bottom: solid 1px #0043ca;
+}
+
+.input-selectBox {
+    width: 135px !important;
+}
+
+.input-box-myPage, .selectbox-bday{
+    float:left;
+}
+
+.selectbox-bday{
+    width: 80%;
+}
+
+
+/* ------------ 프로필 이미지 ------------ */
+#userImg {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 100%;
+    border: 1px solid #f5f5f5 !important;
+}
+
+.uploadResult-userImage ul{
+    padding-left: 0px;
+	margin-bottom: 0px !important;
+}
+
+#deleteUserImageBtn:hover {
+    cursor: pointer;
+}
+
+.uploadResult-userImage ul li {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+#userCheck-userID, #userCheck-userPass {
+    width: 100%
+}
+
+
+/* ------------ 버튼효과 ----------- */
+.defaultBtn {
+    display: inline-block;
+	padding: .3em .5em;
+    color: white;
+    font-weight: normal;
+    vertical-align: middle;
+    background-color:  #0043ca;
+    cursor: pointer;
+    border: 1px solid  #0043ca;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+  
+.crossBtn {
+    display: inline-block;
+    padding: .3em .5em;
+    color: #0043ca;
+    font-weight: normal;
+    line-height: normal;
+    vertical-align: middle;
+    background-color:  #f5f5f5;
+    cursor: pointer;
+    border: 1px solid  #0043ca;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+
+.dangerBtn {
+    display: inline-block;
+    padding: .3em .5em;
+    color: white;
+    font-weight: normal;
+    line-height: normal;
+    vertical-align: middle;
+    background-color:  red;
+    cursor: pointer;
+    border: 1px solid  red;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+
+.defaultBtn:hover {
+    background-color: #f5f5f5;
+    
+    color: #0043ca;
+}
+
+.crossBtn:hover{
+    background-color: #0043ca;
+    
+    color: #f5f5f5;
+}
+
+.dangerBtn:hover{
+    background-color: white;
+
+    color: red;
+}
+  
+.defaultBtn:active {
+    background-color: #1a237e;
+
+    color: white;
+}
+  
+ .crossBtn:active {
+   background-color: white;
+
+   color: #1a237e;
+}
+
+.dangerBtn:active{
+    background-color: rgb(167, 3, 3);
+    
+color: white;
+}
+
+.uploadDiv-userImage-myPage input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#myPage-cancleBtn, #myPage-submitBtn, #submitBtn-modifyUserPass, #cancleBtn-modifyPass {
+	width: 100%;
+
+    margin-top: .5em;
+}
+
+#mypage-dangerZone{
+	border: 1px solid red;
+	border-radius: 5px;
+
+    color: red;
+    
+    padding: 10px;
+
+    width: 70%;
+}
+
+#submitBtn-modifyUserBday, #submitBtn-modifyUserName{
+    display: none;
+}

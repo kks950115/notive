@@ -1,0 +1,40 @@
+.modifyBtn {
+    border: solid 1px gray;
+    border-radius: 5px;
+
+    height: 30px;
+}
+
+.myPage-userInfo {
+    
+    width:300px;
+    height:30px;
+
+    display: inline-block;
+}
+
+#submitBtn-modifyUserBday, #submitBtn-modifyUserName{
+    display: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#mypage-dangerZone{
+	border: 1px solid red;
+	border-radius: 5px;
+
+    color: red;
+    
+    padding: 10px;
+}
+
+#myPage-withdrawBtn {
+    background-color: white;
+    color: red !important;
+    border: 1px solid red !important;
+    border-radius: 5px
+}
+
+

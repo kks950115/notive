@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.notive.myapp.mapper.ScheduleMapper">
+	
+
+		<select id="SelectScheduleVO" resultType="java.util.Map">
+			<![CDATA[ 
+			SELECT 
+			sch_no as "no",
+			user_id as "id",
+			sch_title as "title",
+			sch_start_date as "start",
+			sch_color as "backgroundColor",
+			sch_end_date as "end",
+			sch_content as "content",
+			sch_time as "schtime",
+			sch_dday as "dday",
+			sch_allDay as "schallDay",
+			sch_alarm
+			
+			FROM 
+				tbl_schedule
+			WHERE
+				user_id= #{id}
+				
+			]]>
+		</select>
+		
+		<select id="ScheduleAlarm" resultType="java.util.Map">
+			<![CDATA[
+			
+			SELECT
+			sch_no, 
+			user_id,
+			sch_title,
+			sch_start_date,
+			sch_end_date,
+			sch_color,
+			sch_content,
+			sch_time,
+			sch_dday,
+			sch_allDay,
+			sch_alarm 
+
+			FROM
+			tbl_schedule
+			
+			WHERE user_id = #{id}
+			AND sysdate between to_date(sch_start_date)-3 and to_date(sch_end_date)
+			AND sch_alarm = 1
+
+			]]>
+		</select>
+    
+    
+       <insert id="insertSchedule">
+    	<![CDATA[ 
+    		
+    		INSERT INTO tbl_schedule (
+    		sch_title, 
+    		sch_content, 
+    		sch_time, 
+    		sch_start_date, 
+    		sch_end_date,
+    		sch_color,
+    		sch_dday,
+    		user_id,
+    		sch_allDay,
+    		sch_alarm
+    		)
+    		VALUES (
+    		#{title},
+    		#{content},
+    		#{schtime},
+    		#{start},
+    		#{end},
+    		#{backgroundColor},
+    		#{dday},
+    		#{id},
+    		#{schallDay},
+    		#{sch_alarm}
+    		) 
+    		
+    	 ]]>
+    </insert>
+    
+    <delete id="deleteSchedule" >
+        <![CDATA[ 
+        
+            DELETE FROM tbl_schedule
+            WHERE sch_no = #{no}
+           
+
+        ]]>
+    </delete>
+	
+	<update id="alarmOff">
+		<![CDATA[
+		
+		UPDATE tbl_schedule
+		SET
+			sch_alarm = 0
+		WHERE
+			sch_no=#{sch_no}
+		
+		 ]]>
+	</update>
+	
+    <update id="updateSchedule"  >
+        <![CDATA[ 
+
+            UPDATE tbl_schedule
+            SET 
+            	
+            	sch_title = #{title},
+            	sch_content = #{content},
+            	sch_time = #{schtime},
+            	sch_start_date = #{start},
+            	sch_end_date = #{end},
+            	sch_color = #{backgroundColor},
+            	sch_dDay = #{dday},
+            	sch_allday = #{schallDay},
+            	sch_alarm = #{sch_alarm}
+            		
+            WHERE sch_no = #{no} 
+
+
+        ]]>
+    </update>
+</mapper>

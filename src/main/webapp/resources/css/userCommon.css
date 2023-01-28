@@ -1,0 +1,198 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a, a:hover, a:active, a:visited{
+    color: #757575;
+    text-decoration: none;
+}
+a:hover{
+    cursor: pointer;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+
+.wrapper {
+    display: flex;
+    
+    height: 100vh;
+    
+    flex-direction: column;
+    justify-content: center;
+    
+    align-items: center;
+
+    font-family: 'SpoqaHanSansNeo-Regular';
+    
+    /* text-align: center; */
+}
+
+fieldset {
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    border: 1px #cecece solid;
+}
+
+.login-subContainer {
+    width: 500px;
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-findContainer {
+	display:flex;
+	
+}
+
+/* ------------- 프로필 이미지------------- */
+/* 기본 프로필이미지 */
+#userImg {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 100%;
+    border: 1px solid #f5f5f5 !important;
+}
+
+.uploadResult-userImage ul{
+    padding-left: 0px;
+	margin-bottom: 0px !important;
+}
+
+#deleteUserImageBtn:hover {
+    cursor: pointer;
+}
+
+.uploadResult-userImage ul li {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+/* -------------- 계정 정보 입력박스 ---------- */
+.input-box, .input-selectBox{
+    width: 100%;
+    height: 35px;
+
+    border: 0px;
+    border-bottom: solid 1px #0043ca;
+}
+
+.input-selectBox{
+    width: 32.5% !important;
+}
+
+.form-input {
+    flex-basis: 60%;
+}
+
+#signUp-input-userID{
+	width: 83%;
+}
+
+
+/* --------- 약관보기 modal ------- */
+#showTerms{
+    text-decoration: underline;
+    color: #0043ca;
+}
+
+#showTerms:hover{
+    cursor: pointer;
+}
+
+
+/* signup-desc */
+.signup-desc{
+    color:#757575;
+    font-size: small;
+}
+
+/* ---------- 버튼 효과 --------- */
+.defaultBtn {
+    display: inline-block;
+	padding: .3em .5em;
+    color: white;
+    font-weight: normal;
+    vertical-align: middle;
+    background-color:  #0043ca;
+    cursor: pointer;
+    border: 1px solid  #0043ca;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+  
+.crossBtn{
+    display: inline-block;
+    padding: .3em .5em;
+    color: #0043ca;
+    font-weight: normal;
+    line-height: normal;
+    vertical-align: middle;
+    background-color:  #f5f5f5;
+    cursor: pointer;
+    border: 1px solid  #0043ca;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+
+.defaultBtn:hover {
+    background-color: #f5f5f5;
+    
+    color: #0043ca;
+}
+
+.crossBtn:hover{
+    background-color: white;
+    
+    color: #1a237e;
+}
+  
+.defaultBtn:active {
+    background-color: #1a237e;
+
+    color: white;
+}
+  
+ .crossBtn:active {
+   background-color: rgb(233, 233, 233);
+
+   color: #1a237e;
+}
+.uploadDiv-userImage input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#checkIDBtn {
+	float: right;
+}
+
+#signUp-submitBtn, #find-id-pass-submitBtn, #find-id-pass-cancleBtn {
+    width: 100%;
+}
+
+#find-id-pass-cancleBtn{
+	margin-top: 0.3em;
+}

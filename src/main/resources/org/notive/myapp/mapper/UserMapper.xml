@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.notive.myapp.mapper.UserMapper">
+
+	<!-- 회원가입 -->
+	<insert id="createUser">
+		INSERT INTO tbl_user(user_id, user_pass, user_name, user_bday)
+		VALUES(#{userID}, #{userPass}, #{userName}, #{userBday})
+	</insert>
+	
+	
+	<!-- 아이디 중복 검사 -->
+	<select id="checkID" parameterType="String" resultType="Integer">
+		SELECT count(*)
+		FROM tbl_user
+		WHERE user_id=#{userID}
+	</select>
+	
+	
+	<!-- 인증키 업데이트 -->
+	<update id="updateAuthKey">
+		UPDATE tbl_user
+		SET user_auth_key=#{userAuthKey}
+		WHERE user_id=#{userID}
+	</update>
+	
+	
+	<!-- 인증 여부 업데이트 -->
+	<update id="updateAuthStatus">
+		UPDATE tbl_user
+		SET user_auth_status=1
+		WHERE user_id=#{userID}
+		AND user_auth_key=#{userAuthKey}	
+	</update>
+	
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="org.notive.myapp.domain.UserVO">
+		SELECT *
+		FROM tbl_user
+		WHERE user_id = #{userID}
+		AND user_auth_status=1
+		AND user_state=1
+	</select>
+	
+	
+	<!-- remember-me 사용여부 업데이트 -->
+   <update id="updateUserWithRememberMe">
+        UPDATE tbl_user
+        SET REMEMBERME = #{rememberMe},
+            REMEMBERAGE = #{rememberMeMaxAge}
+        WHERE user_id = #{userID}
+   </update>
+   
+	
+	<!-- remember-me 로그인 유지 -->
+    <select id="selectUserWithRememberMe" resultType="org.notive.myapp.domain.UserVO">
+        SELECT *
+        FROM tbl_user
+        WHERE rememberme = #{rememberMe}
+        AND   rememberage > sysdate
+    </select>
+    
+    
+    <!-- 로그아웃시 remember-me 관련 컬럼 2개 null로 초기화 -->
+    <update id="updateUserWithoutRememberMe">
+    	UPDATE tbl_user
+    	SET 	rememberme = null,
+    			rememberage = null
+    	WHERE user_id = #{userID}
+    </update>
+	
+	
+	<!-- 마이페이지 조회 -->
+	<select id="selectmyPage">
+		SELECT user_id, user_pass, user_name, user_bday
+		FROM tbl_user
+		WHERE user_id=#{userID}
+	</select>
+	
+
+	<!-- 마이페이지 이름 수정 -->
+	<update id="updateUserName">
+		UPDATE tbl_user
+		SET user_name=#{userName}
+		WHERE user_id=#{userID}
+	</update>		
+	
+	
+	<!-- 정보수정 후, 세션에 다시 올리기 위해 아이디로만 회원 조회 -->
+	<select id="selectUserAfterModify" resultType="org.notive.myapp.domain.UserVO">
+		SELECT * 
+		FROM tbl_user
+		WHERE user_id=#{userID}
+		AND   user_auth_status=1
+	</select>
+	
+	
+	<!-- 마이페이지 생일 수정 -->
+	<update id="updateUserBday">
+		UPDATE tbl_user
+		SET user_bday=#{userBday}
+		WHERE user_id=#{userID}
+	</update>	
+	
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectUserID" resultType="String">
+	 <![CDATA[ 
+		SELECT user_id
+		FROM tbl_user
+		WHERE user_name=#{userName}
+		AND   user_bday=#{year}||'/'||#{month}||'/'||#{day}
+	]]>
+	</select>
+	
+	
+	<!-- 비밀번호 찾기(임시비번 발급) -->
+	<update id="updateUserPass">
+		UPDATE tbl_user
+		SET user_pass=#{userPass}
+		WHERE user_id=#{userID}
+		AND   user_bday=#{userBday}
+	</update>
+	
+	
+	<!-- 회원탈퇴 -->
+	<update id="updateUserState">
+		UPDATE tbl_user
+		SET user_state = 2,
+			rememberme = null,
+    		rememberage = null
+		WHERE user_id=#{userID}
+	</update>
+	
+	
+	<!-- 회원등급 조회 -->
+	<select id="selectUserGrade" resultType="String">
+	<![CDATA[ 
+		SELECT user_grade_desc
+		FROM tbl_user u
+		INNER JOIN tbl_user_grade_code g
+		        ON (u.user_grade = g.user_grade)
+		WHERE user_id = #{userID}
+	]]>
+	</select>
+	
+	
+	<!-- 프사 등록 -->
+	<insert id="insertUserImage">
+		INSERT INTO tbl_user_image (uuid, upload_path, file_name, user_id)
+		VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{userID})
+	</insert>
+	
+	
+	<!-- 프사 삭제 -->
+	<delete id="deleteUserImage">
+		DELETE FROM tbl_user_image
+		WHERE uuid = #{uuid}
+	</delete>
+	
+	
+	<!-- 프사 수정 -->
+	<update id="updateUserImage">
+		UPDATE tbl_user_image
+		SET uuid = #{uuid}
+		   ,upload_path = #{uploadPath}
+		   ,file_name = #{fileName}
+		WHERE user_id = #{userID}
+	</update>
+	
+	
+	<!-- 프사 조회 -->
+	<select id="selectUserImgByUserID" resultType="org.notive.myapp.domain.UserImageVO">
+		SELECT *
+		FROM tbl_user_image
+		WHERE user_id = #{userID}
+	</select>
+	
+</mapper>

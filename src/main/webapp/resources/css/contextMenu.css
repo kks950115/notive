@@ -1,0 +1,102 @@
+.trashContext,
+.fileContext,
+.memoContext,
+.dirSectionContext,
+.dirContext,
+.gfolderContext {
+    display: none;
+    position: absolute;
+    margin: 0;
+    padding: 3px 4px 3px 3px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    list-style: none;
+    box-shadow:
+    0 15px 35px rgba(50,50,90,0.1),
+    0 5px 15px rgba(0,0,0,0.07);
+    overflow: hidden;
+    z-index: 999999;
+    font-size: 16px;
+}
+
+.trashContext li,
+.fileContext li,
+.memoContext li,
+.dirSectionContext li,
+.dirContext li,
+.gfolderContext li {
+    border-left: 3px solid transparent;
+    transition: ease .2s;
+}
+
+.trashContext li a,
+.fileContext li a,
+.memoContext li a,
+.dirSectionContext li a,
+.dirContext li a,
+.gfolderContext li a {
+    display: block;
+    padding: 3px 10px 3px 10px;
+    color: #000051;
+    text-decoration: none;
+    transition: ease .2s;
+    padding: 3px 10px 3px 10px;
+}
+
+.trashContext li:hover,
+.fileContext li:hover,
+.memoContext li:hover,
+.dirSectionContext li:hover,
+.dirContext li:hover,
+.gfolderContext li:hover {
+    background: #005cb2;
+    border-left: 3px solid #002171;
+}
+
+.trashContext li:hover a,
+.fileContext li:hover a,
+.memoContext li:hover a,
+.dirSectionContext li:hover a,
+.dirContext li:hover a,
+.gfolderContext li:hover a {
+    color: #FFFFFF;
+}
+
+/* 부트스트랩 오버라이드 */
+
+.input-group {
+    display: flex;
+}
+.userinput {
+    display: block;
+}
+
+.invite-user-list .list-group-item {
+    cursor: pointer;
+    
+    background-color: #bbdefb;
+    border: 1px solid black;
+}
+
+/* 초대 목록 리스트 */
+
+.invite-user-list .list-group-item {
+    cursor: pointer;
+    
+	background-color: #bbdefb;
+    border: 1px solid white;
+}
+
+.invite-user-list .list-group-item:hover{
+	background-color: #efebe9;
+    transition: all .3s;
+}
+
+/* 버튼 BootStrap스타일로 사용 */
+
+.btn-primary{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: none;
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.notive.myapp.mapper.ItemMgtMapper">
+    
+    <select id="getItemList" resultType="org.notive.myapp.domain.ItemVO">
+        SELECT 
+            i.item_no,
+            i.item_name,
+            i.item_capa,
+            i.item_price,
+            m.item_regi_date,
+            m.item_del_date,
+            CASE
+            	WHEN m.item_state = 1 THEN c.item_state_code
+            	WHEN m.item_state = 2 THEN c.item_state_code
+            END
+        FROM tbl_item i INNER JOIN tbl_item_management m
+        ON i.item_no = m.item_no INNER JOIN tbl_item_state_code c
+        ON m.item_state = c.item_state
+        ORDER BY i.item_no ASC
+         
+    </select>
+
+    <select id="getItem" resultType="org.notive.myapp.domain.ItemVO">
+        SELECT 
+            i.item_no,
+            i.item_name,
+            i.item_capa,
+            i.item_price,
+            m.item_regi_date,
+            m.item_del_date,
+            CASE
+                WHEN m.item_state = 1 THEN c.item_state_code
+                WHEN m.item_state = 2 THEN c.item_state_code
+            END
+        FROM tbl_item i INNER JOIN tbl_item_management m
+        ON i.item_no = m.item_no INNER JOIN tbl_item_state_code c
+        ON m.item_state = c.item_state
+        WHERE i.item_no = #{itemNo}
+
+    </select>
+
+    <insert id="itemInsert">
+        INSERT INTO tbl_item (item_name, item_capa, item_price)
+        VALUES (#{itemName}||'GB', #{itemCapa}||'GB', #{itemPrice})
+    </insert>
+
+
+    <insert id="itemInsertMgt">
+        INSERT INTO tbl_item_management (item_no, admin_id, item_state)
+        VALUES (ISEQ$$_117429.currval, #{adminID}, 1)
+        
+    </insert>
+
+
+    <update id="itemDelete">
+        
+        UPDATE tbl_item_management
+
+        SET item_state =
+            CASE
+                WHEN item_state = 1 THEN  2
+                WHEN item_state = 2 THEN  1
+            END
+            
+        WHERE item_no LIKE #{itemNo}
+        
+    </update>
+    
+    <update id="itemUpdate">
+        UPDATE tbl_item
+
+        SET item_name = #{itemName}||'GB',
+            item_capa = #{itemCapa}||'GB',
+            item_price = #{itemPrice}
+
+        WHERE item_no = #{itemNo}
+    </update>
+
+
+
+
+     
+    	
+
+    
+    
+    
+</mapper>

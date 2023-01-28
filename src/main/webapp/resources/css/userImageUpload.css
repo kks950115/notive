@@ -1,0 +1,13 @@
+@charset "UTF-8";        
+
+
+.uploadResult-userImage ul{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#deleteUserImageBtn:hover {
+    cursor: pointer;
+}

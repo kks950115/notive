@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.notive.myapp.mapper.TrashMapper">
+
+    <select id="selectTrashByOriginNo" 
+    		resultType="org.notive.myapp.domain.TrashVO">
+    	<![CDATA[ 
+	        SELECT 
+	        	*
+	        FROM 
+	            tbl_trash
+	        WHERE 
+	            user_id = #{user_id}
+	        AND
+	        	origin_no = #{origin_no}
+        ]]>
+    </select>
+
+    <select id="selectTrashList" 
+    		resultType="org.notive.myapp.domain.TrashVO">
+    	<![CDATA[ 
+	        SELECT 
+	        	/*+ INDEX_ASC(tbl_trash) */ *
+	        FROM 
+	            tbl_trash
+	        WHERE 
+	            user_id = #{user_id}
+        ]]>
+    </select>
+    
+    <select id="selectTrash" 
+    		resultType="org.notive.myapp.domain.TrashVO">
+    	<![CDATA[ 
+	        SELECT 
+	        	*
+	        FROM 
+	            tbl_trash
+	        WHERE 
+	            user_id = #{user_id}
+	        AND
+	        	trash_no = #{trash_no}
+        ]]>
+    </select>
+    
+	<insert id="insertTrash">
+        <![CDATA[ 
+        
+	        INSERT INTO tbl_trash (user_id, sort_code, origin_no, origin_name)
+	        VALUES (#{user_id}, #{sort_code}, #{origin_no}, #{origin_name})
+    
+        ]]>
+	</insert>
+	
+	<insert id="deleteTrash">
+        <![CDATA[ 
+        
+			DELETE FROM tbl_trash
+			WHERE trash_no = #{trash_no}
+    
+        ]]>
+	</insert>
+	
+		<insert id="deleteTrashByOriginNo">
+        <![CDATA[ 
+        
+			DELETE FROM tbl_trash
+			WHERE sort_code = #{sort_code}
+			AND origin_no = #{origin_no}
+    
+        ]]>
+	</insert>
+    
+</mapper>
